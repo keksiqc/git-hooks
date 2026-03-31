@@ -15,7 +15,8 @@
   ],
   "scripts": {
     "postinstall": "node ./postinstall.js",
-    "lint": "eslint *.js",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "test": "node --experimental-vm-modules ./node_modules/.bin/jest",
     "release": "clean-pkg-json && changeset publish",
     "uninstall": "node ./uninstall.js"
@@ -34,19 +35,19 @@
     "url": "https://github.com/toplenboren/simple-git-hooks.git"
   },
   "lint-staged": {
-    "*.js": "eslint"
+    "*.{js,jsx,ts,tsx,mjs,cjs}": "bun run lint"
   },
   "simple-git-hooks": {
-    "pre-commit": "bun lint"
+    "pre-commit": "bun  run lint-staged"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.6.0",
     "@changesets/cli": "^2.30.0",
     "clean-pkg-json": "^1.4.1",
-    "eslint": "^10.1.0",
     "jest": "^30.3.0",
     "lint-staged": "^16.4.0",
     "lodash.isequal": "^4.5.0",
+    "oxlint": "^1.58.0",
     "simple-git-hooks": "link:."
   }
 }
